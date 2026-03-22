@@ -9,7 +9,7 @@ const clients = [
 
 const corsOptions = (req, callback) => {
   const origin = req.headers.origin;
-  const client = clients.find((c) => c.origin === origin);
+  const client = clients.find((client) => client.origin === origin);
 
   if (client) {
     callback(null, {
