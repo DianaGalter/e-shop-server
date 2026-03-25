@@ -1,4 +1,4 @@
-const clients = [
+const defaultClients = [
   {
     origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
@@ -6,6 +6,16 @@ const clients = [
     credentials: true,
   },
 ];
+
+let clients = defaultClients;
+if (process.env.CORS_CLIENTS) {
+  try {
+    clients = JSON.parse(process.env.CORS_CLIENTS);
+  } catch (parseError) {
+    console.warn("CORS_CLIENTS is not valid JSON; using default CORS clients.");
+    clients = defaultClients;
+  }
+}
 
 const corsOptions = (req, callback) => {
   const origin = req.headers.origin;
