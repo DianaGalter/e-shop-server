@@ -6,12 +6,12 @@ const mailTransport = nodemailer.createTransport({
   secure: false,
   auth: {
     user: process.env.EMAIL_FROM,
-    pass: process.env.EMAIL_APP_PASSWORD,
+    pass: process.env.EMAIL_APP_PASSWORD?.replace(/\s/g, ""),
   },
 });
 
 const publicBaseUrl =
-  process.env.CLIENT_URL || process.env.FRONTEND_URL || "http://localhost:5173";
+  process.env.SERVER_URL || process.env.BACKEND_URL || "http://localhost:5000";
 
 const sendMail = async ({ to, subject, html, text }) => {
   if (!process.env.EMAIL_FROM || !process.env.EMAIL_APP_PASSWORD) {
@@ -29,8 +29,12 @@ const sendMail = async ({ to, subject, html, text }) => {
   });
 };
 
-const sendVerificationEmail = async (recipientEmail, verificationToken, recipientName) => {
-  const verifyLink = `${publicBaseUrl}/verify-email/${verificationToken}`;
+const sendVerificationEmail = async (
+  recipientEmail,
+  verificationToken,
+  recipientName,
+) => {
+  const verifyLink = `${publicBaseUrl}/api/v1/auth/verify-email/${verificationToken}`;
   const subject = "Verify your account";
   const html = `
     <div style="font-family:sans-serif;max-width:560px;margin:0 auto;">
@@ -44,7 +48,7 @@ const sendVerificationEmail = async (recipientEmail, verificationToken, recipien
 };
 
 const sendResetPasswordEmail = async (recipientEmail, resetToken) => {
-  const resetLink = `${publicBaseUrl}/reset-password/${resetToken}`;
+  const resetLink = `${publicBaseUrl}/api/v1/auth/reset-password/${resetToken}`;
   const subject = "Password reset";
   const html = `
     <div style="font-family:sans-serif;max-width:560px;margin:0 auto;">
