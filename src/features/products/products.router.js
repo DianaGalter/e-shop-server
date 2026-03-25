@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const productController = require("./product.controller");
+const productController = require("./products.controller");
 const { validate } = require("../../shared/middleware/validate.middleware");
 const authenticate = require("../../shared/middleware/authenticate.middleware");
 const authorize = require("../../shared/middleware/authorize.middleware");
@@ -41,7 +41,7 @@ router.delete(
 router.post(
   "/:id/rating",
   authenticate,
-  authorize("customer", "admin"),
+  authorize("customer"),
   validate(ratingSchema),
   productController.addRating,
 );

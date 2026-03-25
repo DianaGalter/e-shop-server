@@ -1,6 +1,6 @@
 const Order = require("./order.model");
 const Product = require("../products/product.model");
-const User = require("../users/user.model");
+const User = require("../users/users.model");
 const {
   sendOrderConfirmation,
   sendOrderStatusUpdate,

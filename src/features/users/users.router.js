@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const userController = require("./user.controller");
+const userController = require("./users.controller");
 const { validate } = require("../../shared/middleware/validate.middleware");
 const authenticate = require("../../shared/middleware/authenticate.middleware");
 const authorize = require("../../shared/middleware/authorize.middleware");
@@ -8,7 +8,7 @@ const {
   updateProfileSchema,
   changePasswordSchema,
   addressSchema,
-} = require("./user.schemas");
+} = require("./users.schemas");
 
 router.get("/profile", authenticate, userController.getProfile);
 router.put(

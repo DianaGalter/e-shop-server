@@ -1,4 +1,4 @@
-const User = require("./user.model");
+const User = require("./users.model");
 
 const getProfile = async (userId) => {
   const user = await User.findById(userId);

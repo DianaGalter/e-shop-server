@@ -1,5 +1,5 @@
 const Joi = require("joi");
-import { addressSchema } from "../users/users.schemas";
+const { addressSchema } = require("../users/users.schemas");
 
 const createOrderSchema = Joi.object({
   items: Joi.array()
