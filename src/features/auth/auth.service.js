@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
-const User = require("../users/user.model");
+const User = require("../users/users.model");
 const {
   sendVerificationEmail,
   sendResetPasswordEmail,

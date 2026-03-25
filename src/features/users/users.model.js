@@ -57,6 +57,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       minlength: 8,
+      select: false,
     },
     role: {
       type: String,
@@ -114,6 +115,13 @@ UserSchema.pre("save", async function (next) {
 UserSchema.methods.comparePassword = async function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
+
+UserSchema.set("toJSON", {
+  transform(document, returnedObject) {
+    delete returnedObject.password;
+    return returnedObject;
+  },
+});
 
 const User = mongoose.model("User", UserSchema);
 module.exports = User;

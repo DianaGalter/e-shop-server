@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { AddressSchema } = require("../users/user.model");
+const { AddressSchema } = require("../users/users.model");
 
 const OrderItemSchema = new mongoose.Schema(
   {

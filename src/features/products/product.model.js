@@ -38,7 +38,7 @@ const ProductSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ["electronics", "clothing", "food"],
+      enum: ["electronics", "clothing", "food", "books", "other"],
     },
     images: {
       type: [String],
@@ -80,6 +80,7 @@ const ProductSchema = new mongoose.Schema(
 );
 
 ProductSchema.index({ category: 1 });
+ProductSchema.index({ name: 1 });
 ProductSchema.index({ category: 1, price: 1 });
 
 const Product = mongoose.model("Product", ProductSchema);
