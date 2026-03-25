@@ -110,7 +110,9 @@ const addRating = async (productId, userId, rating, comment) => {
   }
 
   const sum = product.ratings.reduce((accum, rate) => accum + rate.rating, 0);
-  product.averageRating = (sum / product.ratings.length).toFixed(2);
+  product.averageRating = Number(
+    (sum / product.ratings.length).toFixed(2),
+  );
   await product.save();
   return product;
 };
