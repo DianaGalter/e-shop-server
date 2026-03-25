@@ -12,14 +12,14 @@ const {
 router.post(
   "/",
   authenticate,
-  authorize("customer", "admin"),
+  authorize("customer"),
   validate(createOrderSchema),
   orderController.create,
 );
 router.get(
   "/my-orders",
   authenticate,
-  authorize("customer", "admin"),
+  authorize("customer"),
   orderController.getMyOrders,
 );
 router.get("/", authenticate, authorize("admin"), orderController.getAll);
@@ -34,7 +34,7 @@ router.put(
 router.put(
   "/:id/cancel",
   authenticate,
-  authorize("customer", "admin"),
+  authorize("customer"),
   orderController.cancel,
 );
 

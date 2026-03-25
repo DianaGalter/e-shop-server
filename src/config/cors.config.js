@@ -19,6 +19,9 @@ if (process.env.CORS_CLIENTS) {
 
 const corsOptions = (req, callback) => {
   const origin = req.headers.origin;
+  if (!origin) {
+    return callback(null, { origin: false });
+  }
   const client = clients.find((client) => client.origin === origin);
 
   if (client) {

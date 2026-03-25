@@ -54,7 +54,6 @@ const create = async (userId, data) => {
     shippingCost: SHIPPING_COST,
     paymentMethod: data.paymentMethod,
     notes: data.notes,
-    paymentStatus: "paid",
   });
 
   await User.findByIdAndUpdate(userId, { $set: { cart: [] } });
