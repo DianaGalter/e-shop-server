@@ -1,25 +1,29 @@
 const multer = require("multer");
 const path = require("path");
 
+const uploadsRootDirectory = path.join(__dirname, "../../uploads");
+
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
+  destination: (request, file, callback) => {
+    callback(null, uploadsRootDirectory);
   },
-  filename: (req, file, cb) => {
-    const uniqueName = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}${path.extname(file.originalname) || ".jpg"}`;
-    cb(null, uniqueName);
+  filename: (request, file, callback) => {
+    const uniqueName = `${Date.now()}-${Math.random().toString(36).substring(2, 11)}${path.extname(file.originalname) || ".jpg"}`;
+    callback(null, uniqueName);
   },
 });
 
-const fileFilter = (req, file, cb) => {
+const fileFilter = (request, file, callback) => {
   const allowedTypes = /jpeg|jpg|png|gif|webp/;
   const ext = allowedTypes.test(path.extname(file.originalname).toLowerCase());
   const mime = allowedTypes.test(file.mimetype);
 
   if (ext && mime) {
-    cb(null, true);
+    callback(null, true);
   } else {
-    cb(new Error("Only image files are allowed (jpeg, jpg, png, gif, webp)"));
+    callback(
+      new Error("Only image files are allowed (jpeg, jpg, png, gif, webp)"),
+    );
   }
 };
 
