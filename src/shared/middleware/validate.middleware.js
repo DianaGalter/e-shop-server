@@ -1,18 +1,18 @@
 const validate = (schema) => {
   return (req, res, next) => {
-    const { error, value } = schema.validate(req.body, { 
-      abortEarly: false, 
-      stripUnknown: true 
+    const { error, value } = schema.validate(req.body, {
+      abortEarly: false,
+      stripUnknown: true,
     });
 
     if (error) {
-      const errors = error.details.map(detail => ({
-        field: detail.path.join('.'),
-        message: detail.message
+      const errors = error.details.map((detail) => ({
+        field: detail.path.join("."),
+        message: detail.message,
       }));
       return res.status(422).json({
         success: false,
-        errors
+        errors,
       });
     }
 
@@ -21,4 +21,4 @@ const validate = (schema) => {
   };
 };
 
-module.exports = validate;
+module.exports = { validate };
